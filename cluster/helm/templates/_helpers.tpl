@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "simple-app.name" -}}
+{{- define "simple-app-2.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "simple-app.fullname" -}}
+{{- define "simple-app-2.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "simple-app.chart" -}}
+{{- define "simple-app-2.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "simple-app.labels" -}}
-helm.sh/chart: {{ include "simple-app.chart" . }}
-{{ include "simple-app.selectorLabels" . }}
+{{- define "simple-app-2.labels" -}}
+helm.sh/chart: {{ include "simple-app-2.chart" . }}
+{{ include "simple-app-2.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "simple-app.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "simple-app.name" . }}
+{{- define "simple-app-2.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "simple-app-2.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "simple-app.serviceAccountName" -}}
+{{- define "simple-app-2.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "simple-app.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "simple-app-2.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
